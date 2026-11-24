@@ -1,5 +1,5 @@
-% Читання запису MPU-6050 (t_ms,ax,ay,az,gx,gy,gz) з папки data
-d = readmatrix(fullfile('data', file));
+% Читання запису MPU-6050 (t_ms,ax,ay,az,gx,gy,gz) з папки CSV_Example
+d = readmatrix(fullfile('CSV_Example', file));   % ADJUST: папка із записами
 d = d(all(~isnan(d), 2), :);          % прибирає текстові рядки PuTTY
 d = d(find(d(:,1) == 0, 1):end, :);   % бере дані після Reset
 
