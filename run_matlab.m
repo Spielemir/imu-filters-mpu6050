@@ -1,4 +1,4 @@
-% Для перевірки даниз без Simulink ()
+% Те саме, що run_simulink, але без Simulink (для перевірки)
 clear; clc; close all;
 clear complementary_filter kalman_filter    % скидаю стан фільтрів
 params;
