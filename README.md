@@ -6,22 +6,33 @@
 
 ## Що в репозиторії
 
-| Файл / папка | Що це |
+```
+imu_filters.slx      модель Simulink з усіма фільтрами
+run_simulink.m       головний скрипт, проганяє дані через модель
+run_matlab.m         те саме без Simulink
+sweep_K.m            перебір коефіцієнта K комплементарного фільтра
+filter_analysis.m    полюси, ЛАЧХ/ФЧХ і Найквіст для фільтрів
+
+filters/             complementary_filter.m, kalman_filter.m
+input/               params.m, sensor_model.m, load_mpu6050.m, load_data.m
+analysis/            filter_metrics.m, tilt_analysis.m
+CSV_Example/         мої записи: rest, tilt, vibration, tilt_vibration
+Arduino_logger/      скетч запису сирих даних у CSV (100 Гц)
+images/              картинки для README
+```
+
+| Файл | Що робить |
 |---|---|
-| `Arduino_logger/` | скетч, який пише сирі дані датчика в порт у форматі CSV (100 Гц) |
-| `CSV_Example/` | мої записи: `rest`, `tilt`, `vibration`, `tilt_vibration` |
-| `imu_filters.slx` | модель Simulink з усіма фільтрами |
-| `run_simulink.m` | головний скрипт, проганяє дані через модель |
-| `run_matlab.m` | те саме без Simulink |
-| `params.m` | крок dt, коефіцієнти фільтрів, поправка акселерометра |
-| `sensor_model.m` | модель сигналів: кут + дрейф гіроскопа + вібрація |
-| `load_mpu6050.m` | читає CSV, калібрує датчик, рахує кут з акселерометра |
-| `load_data.m` | вибирає модель або запис |
-| `complementary_filter.m`, `kalman_filter.m` | самі фільтри |
-| `filter_metrics.m` | графік і похибки |
-| `tilt_analysis.m` | похибки в положеннях ±90° і запізнення |
-| `sweep_K.m` | перебір коефіцієнта K комплементарного фільтра |
-| `filter_analysis.m` | полюси, ЛАЧХ/ФЧХ і Найквіст для фільтрів |
+| `input/params.m` | крок dt, коефіцієнти фільтрів, поправка акселерометра |
+| `input/sensor_model.m` | модель сигналів: кут + дрейф гіроскопа + вібрація |
+| `input/load_mpu6050.m` | читає CSV, калібрує датчик, рахує кут з акселерометра |
+| `input/load_data.m` | вибирає модель або запис |
+| `filters/*.m` | самі фільтри, їх викликає Simulink |
+| `analysis/filter_metrics.m` | графік і похибки |
+| `analysis/tilt_analysis.m` | похибки в положеннях ±90° і запізнення |
+
+У корені лежать тільки ті скрипти, які запускаються руками. Вони самі підключають
+папки `filters`, `input` і `analysis` через `addpath`.
 
 Місця, які можна підкручувати під свій датчик, позначені в коді коментарем `ADJUST`.
 
@@ -29,7 +40,7 @@
 
 1. Скачати репозиторій (Code → Download ZIP) і розпакувати.
 2. У MATLAB (або MATLAB Online, туди zip можна закинути через Upload і зробити `unzip`)
-   зробити цю папку поточною.
+   зробити поточною кореневу папку репозиторію, не підпапки.
 3. Відкрити `run_simulink.m` і вибрати, що фільтрувати:
 
 ```matlab
@@ -77,7 +88,7 @@ Windows: PuTTY → Serial, свій COM, 115200, Session → Logging → All ses
 по них калібрується гіроскоп. Файл покласти в `CSV_Example`.
 
 Мій модуль стоїть догори дном і має зсув по осі Z близько 0,14 g. Для іншого модуля
-треба поправити `az0` у `params.m` і знаки в `load_mpu6050.m`.
+треба поправити `az0` у `input/params.m` і знаки в `input/load_mpu6050.m`.
 
 ## Результати
 

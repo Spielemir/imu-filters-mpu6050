@@ -1,5 +1,6 @@
 % Як коефіцієнт K комплементарного фільтра впливає на похибку (на моделі)
 clear; clc; close all;
+addpath('filters', 'input', 'analysis');   % папки з функціями
 params;
 sensor_model;
 m = t > 2;

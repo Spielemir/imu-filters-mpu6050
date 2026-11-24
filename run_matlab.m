@@ -1,5 +1,6 @@
 % Те саме, що run_simulink, але без Simulink (для перевірки)
 clear; clc; close all;
+addpath('filters', 'input', 'analysis');   % папки з функціями
 clear complementary_filter kalman_filter    % скидаю стан фільтрів
 params;
 

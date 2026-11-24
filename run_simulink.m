@@ -1,5 +1,6 @@
 % Фільтрація через Simulink (модель imu_filters.slx)
 clear; clc; close all;
+addpath('filters', 'input', 'analysis');   % папки з функціями
 params;
 
 % ADJUST: що фільтрувати і на якому інтервалі рахувати похибки

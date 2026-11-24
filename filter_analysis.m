@@ -1,5 +1,6 @@
 % Передаточні функції, частотні характеристики і стійкість фільтрів
 clear; clc; close all;
+addpath('filters', 'input', 'analysis');   % папки з функціями
 params;
 Tf  = dt*(1 - alpha)/alpha      % стала часу ФНЧ, с
 tau = dt*(1 - K)/K              % стала часу комплементарного, с
